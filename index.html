@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="令和8年熊本地震(2026-07-28発生)の八代市向け災害支援情報まとめ。避難所・給水・罹災証明・支援制度・交通などを出典つきで整理。">
+<title>八代市 災害支援情報ダッシュボード｜令和8年熊本地震</title>
+<style>
+  :root {
+    --bg:#F2F6F6; --surface:#FFFFFF; --surface2:#E7EFEF; --ink:#16262A; --muted:#4F686D; --line:#D3E0E0;
+    --accent:#136169; --accent-soft:#DCECEC; --accent-contrast:#FFFFFF;
+    --crit:#B23A2E; --crit-bg:#F9E9E6;
+    --warn:#8A6100; --warn-bg:#F7EDD3;
+    --ok:#1E6F45; --ok-bg:#E2F0E7;
+    --shadow:0 1px 3px rgba(22,38,42,.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:#0F1719; --surface:#182225; --surface2:#1F2C30; --ink:#E4EDEE; --muted:#95AAAF; --line:#2C3B40;
+      --accent:#6FBFC4; --accent-soft:#1B2E31; --accent-contrast:#0E1618;
+      --crit:#E8887D; --crit-bg:#3A211E;
+      --warn:#E2BB66; --warn-bg:#37301C;
+      --ok:#7CC79A; --ok-bg:#1E3226;
+      --shadow:none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#0F1719; --surface:#182225; --surface2:#1F2C30; --ink:#E4EDEE; --muted:#95AAAF; --line:#2C3B40;
+    --accent:#6FBFC4; --accent-soft:#1B2E31; --accent-contrast:#0E1618;
+    --crit:#E8887D; --crit-bg:#3A211E;
+    --warn:#E2BB66; --warn-bg:#37301C;
+    --ok:#7CC79A; --ok-bg:#1E3226;
+    --shadow:none;
+  }
+  :root[data-theme="light"] {
+    --bg:#F2F6F6; --surface:#FFFFFF; --surface2:#E7EFEF; --ink:#16262A; --muted:#4F686D; --line:#D3E0E0;
+    --accent:#136169; --accent-soft:#DCECEC; --accent-contrast:#FFFFFF;
+    --crit:#B23A2E; --crit-bg:#F9E9E6;
+    --warn:#8A6100; --warn-bg:#F7EDD3;
+    --ok:#1E6F45; --ok-bg:#E2F0E7;
+    --shadow:0 1px 3px rgba(22,38,42,.08);
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: "BIZ UDPGothic","Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Noto Sans JP",Meiryo,sans-serif;
+    line-height: 1.65; margin: 0; font-size: 15px;
+  }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 20px 16px 64px; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  header.top { border-bottom: 3px solid var(--accent); padding-bottom: 16px; margin-bottom: 16px; }
+  .eyebrow { font-size: 12px; letter-spacing: .12em; color: var(--muted); font-weight: 700; }
+  h1 { font-size: 26px; margin: 4px 0 6px; line-height: 1.3; text-wrap: balance; }
+  .quake-line { font-size: 14px; color: var(--muted); margin: 0 0 10px; }
+  .asof-badge {
+    display: inline-block; background: var(--accent); color: var(--accent-contrast);
+    font-weight: 700; font-size: 13px; padding: 4px 12px; border-radius: 4px;
+  }
+  .top-note { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+  .disclaimer {
+    background: var(--surface); border: 2px solid var(--warn);
+    border-radius: 8px; padding: 14px 18px; margin: 16px 0 4px;
+  }
+  .disclaimer .dis-lead { margin: 0 0 8px; font-size: 14px; }
+  .disclaimer .dis-lead strong { color: var(--warn); }
+  .disclaimer .dis-author {
+    margin: 10px 0 0; padding-top: 8px; border-top: 1px solid var(--line);
+    font-size: 13.5px; font-weight: 700; color: var(--ink);
+  }
+  .disclaimer .dis-sep { color: var(--muted); font-weight: 400; margin: 0 6px; }
+
+  .alert {
+    background: var(--crit-bg); border-left: 4px solid var(--crit);
+    padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 14px 0; font-size: 14px;
+  }
+  .alert strong { color: var(--crit); }
+
+  nav.jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 22px; }
+  nav.jump a {
+    text-decoration: none; font-size: 13px; font-weight: 600;
+    background: var(--surface); border: 1px solid var(--line);
+    padding: 5px 12px; border-radius: 999px; color: var(--ink);
+  }
+  nav.jump a:hover { border-color: var(--accent); color: var(--accent); }
+
+  .em-strip {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 16px; margin-bottom: 22px; box-shadow: var(--shadow);
+  }
+  .em-strip h2 { font-size: 14px; margin: 0 0 8px; letter-spacing: .06em; color: var(--muted); }
+  .em-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px 18px; font-size: 13.5px; }
+  .em-grid b { font-weight: 600; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 8px; }
+  .stat {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 14px; box-shadow: var(--shadow);
+  }
+  .stat .label { font-size: 12px; color: var(--muted); font-weight: 700; letter-spacing: .04em; }
+  .stat .value { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.2; margin: 2px 0; }
+  .stat .sub { font-size: 12px; color: var(--muted); }
+  .stat .asof { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .stats-note { font-size: 12px; color: var(--muted); margin: 0 0 24px; }
+
+  section { margin-bottom: 34px; }
+  section > h2 {
+    font-size: 19px; margin: 0 0 4px; padding-top: 8px;
+    border-top: 2px solid var(--line); scroll-margin-top: 12px;
+  }
+  .sec-note { font-size: 13px; color: var(--muted); margin: 0 0 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 16px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 6px;
+  }
+  .card.span2 { grid-column: 1 / -1; }
+  .card h3 { font-size: 15px; margin: 0; line-height: 1.45; }
+  .card p { margin: 0; font-size: 13.5px; }
+  .card ul { margin: 0; padding-left: 18px; font-size: 13.5px; }
+  .card li { margin: 2px 0; }
+  .meta { font-size: 13px; color: var(--muted); margin: 0; }
+  .meta b { color: var(--ink); font-weight: 600; }
+  .src { font-size: 12px; color: var(--muted); margin-top: auto; padding-top: 6px; border-top: 1px dashed var(--line); }
+  .src a { color: var(--muted); }
+  .src a:hover { color: var(--accent); }
+
+  .pill {
+    display: inline-block; font-size: 11.5px; font-weight: 700; padding: 1px 9px;
+    border-radius: 999px; vertical-align: 2px; margin-left: 6px; white-space: nowrap;
+  }
+  .p-ok   { background: var(--ok-bg);   color: var(--ok); }
+  .p-warn { background: var(--warn-bg); color: var(--warn); }
+  .p-crit { background: var(--crit-bg); color: var(--crit); }
+  .p-info { background: var(--accent-soft); color: var(--accent); }
+
+  .tbl-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--surface2); font-weight: 700; white-space: nowrap; }
+
+  .unconfirmed { background: var(--surface2); border: 1px solid var(--line); border-radius: 8px; padding: 14px 18px; }
+  .unconfirmed h3 { margin: 0 0 6px; font-size: 15px; }
+  .unconfirmed ul { margin: 0; padding-left: 18px; font-size: 13.5px; }
+
+  footer { border-top: 2px solid var(--line); margin-top: 40px; padding-top: 14px; font-size: 12.5px; color: var(--muted); }
+  footer p { margin: 4px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">令和8年熊本地震（2026年7月28日発生）</div>
+  <h1>八代市 災害支援情報ダッシュボード</h1>
+  <p class="quake-line">2026年7月28日（火）16時27分ごろ発生 ／ 震源: 熊本県熊本地方 ／ M7.1（暫定値）・深さ約16km（暫定値） ／ <strong>八代市は震度6強</strong>（震度7は宇城市・氷川町） ／ 津波注意報は同日18:10解除</p>
+  <span class="asof-badge">情報は 2026年8月1日（土）13:30確認 — 最新の出典は同日11:30時点</span>
+  <p class="top-note">各項目に「いつ時点の情報か」を時刻まで明記しています（時刻不明のものは日付のみ）。</p>
+</header>
+
+<div class="disclaimer">
+  <p class="dis-lead"><strong>必ず公式の一次情報で確認してください。</strong>災害情報は刻々と変わります。このページは<strong>非公式のまとめ</strong>であり、行動する前に必ず各項目の出典リンク先（八代市・熊本県・国などの公式発表）で最新の状況をご確認ください。掲載後に状況が変わっている可能性があります。</p>
+  <p class="dis-lead"><strong>このページはAI（生成AI）を用いて作成しています。</strong>公開情報をAIで収集・整理し、人が確認したうえで公開していますが、誤り・古い情報・抜けが含まれる可能性があります。内容の正確性・最新性は保証できません。判断の根拠には必ず公式情報をお使いください。</p>
+  <p class="dis-author">作成: 小金井市 永鳥太郎<span class="dis-sep">／</span>八代市および関係機関の公式な発表ではありません</p>
+</div>
+
+<div class="alert">
+  <strong>市内全域に避難指示（警戒レベル4）が発令中です。</strong>7月28日18:00に八代市全域（58,255世帯・118,057人）へ発令され、8月1日時点で解除・切替の告知は確認できていません（最新は<a href="https://www.city.yatsushiro.lg.jp/kinkyu.html">市の緊急情報</a>で確認を）。あわせて<strong>震度3以上の余震が62回以上</strong>発生しており気象庁は「1週間程度は最大震度7程度の地震に注意」と呼びかけ、熊本県には<strong>熱中症警戒アラート</strong>が発表中、猛烈な台風13号「ドルフィン」の影響の可能性もあります。
+  <span style="font-size:12px">〔出典: <a href="https://crisis.yahoo.co.jp/evacuation/43/43202/">Yahoo!天気・災害（Lアラート）</a> / <a href="https://www.mlit.go.jp/common/002014899.pdf">国交省第15報 (8/1 9:30現在)</a> / <a href="https://www.wbgt.env.go.jp/alert.php">環境省・気象庁 熱中症警戒アラート (8/1 5:00発表)</a>〕</span>
+</div>
+
+<nav class="jump">
+  <a href="#hinan">避難所</a>
+  <a href="#mizu">水・給水</a>
+  <a href="#lifeline">電気・ガス・トイレ</a>
+  <a href="#omise">お店・入浴・給油</a>
+  <a href="#risai">罹災証明・手続き</a>
+  <a href="#okane">お金の支援</a>
+  <a href="#sumai">住まい</a>
+  <a href="#iryo">医療・健康</a>
+  <a href="#kodomo">こども・学校</a>
+  <a href="#gomi">災害ごみ</a>
+  <a href="#kotsu">交通</a>
+  <a href="#jigyo">事業者・支援したい方</a>
+  <a href="#volunteer">ボランティア・義援金</a>
+  <a href="#mikakunin">未確認事項</a>
+  <a href="#links">情報源リンク集</a>
+</nav>
+
+<div class="em-strip">
+  <h2>八代市の主な連絡先</h2>
+  <div class="em-grid">
+    <div><b>被災者支援 総合相談窓口</b><br><a href="tel:0965334452">0965-33-4452</a>（平日9:00〜17:00・本庁舎2階）</div>
+    <div><b>市役所 代表</b><br><a href="tel:0965334111">0965-33-4111</a></div>
+    <div><b>障がい者支援課</b><br><a href="tel:0965350294">0965-35-0294</a></div>
+    <div><b>支援物資について</b>（商工政策課）<br><a href="tel:0965338513">0965-33-8513</a></div>
+    <div><b>簡易トイレ</b>（市民環境課）<br><a href="tel:0965334114">0965-33-4114</a></div>
+    <div><b>ボランティア</b>（健康福祉政策課）<br><a href="tel:0965334003">0965-33-4003</a></div>
+    <div><b>都市ガス</b>（九州ガス八代エリア専用）<br><a href="tel:0120967791">0120-96-7791</a></div>
+    <div><b>救急を呼ぶか迷ったら</b><br><a href="tel:%237119">#7119</a> ／ 子ども <a href="tel:%238000">#8000</a></div>
+    <div><b>八代市医師会テレホンサービス</b><br><a href="tel:0965347001">0965-34-7001</a></div>
+    <div><b>災害用伝言ダイヤル</b><br><a href="tel:171">171</a>（安否の録音・再生）</div>
+    <div><b>詐欺・悪質商法の相談</b><br>警察 <a href="tel:%239110">#9110</a> ／ 消費者ホットライン <a href="tel:188">188</a></div>
+    <div><b>金融庁 相談ダイヤル</b><br><a href="tel:0120156811">0120-156811</a>（平日10:00〜17:00）</div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="label">死者（八代市）</div>
+    <div class="value">20人</div>
+    <div class="sub"><b>県内最多</b>。県内では36人（うち災害との関連調査中2人）</div>
+    <div class="asof">8/1 7:30 県資料</div>
+  </div>
+  <div class="stat">
+    <div class="label">負傷（八代市）</div>
+    <div class="value">未計上</div>
+    <div class="sub"><b>ゼロという意味ではありません。</b>県の市町村別集計では八代市の負傷者が計上されていません（宇城市も同様）。県内合計は102人</div>
+    <div class="asof">8/1 7:30 県資料</div>
+  </div>
+  <div class="stat">
+    <div class="label">避難者（八代市）</div>
+    <div class="value">3,806人</div>
+    <div class="sub">1,401世帯・避難所46か所。ただし<b>水が使えるのは16か所のみ</b>（電気とエアコンは46か所すべて可）</div>
+    <div class="asof">8/1 6:00 市発表</div>
+  </div>
+  <div class="stat">
+    <div class="label">断水（八代市）</div>
+    <div class="value">市内全域</div>
+    <div class="sub">約25,136戸・56,661人。<b>市は「いつ再開できるか見通しが立たない」と明言</b></div>
+    <div class="asof">8/1 9:30 国交省／市資料は7/30 16:00現在</div>
+  </div>
+  <div class="stat">
+    <div class="label">都市ガス（八代市）</div>
+    <div class="value">8,892戸</div>
+    <div class="sub">九州ガス八代地区が供給停止。復旧は<b>8月3日（月）目途</b>。7/31から1軒ずつ訪問して開栓中</div>
+    <div class="asof">7/31 九州ガス第9報</div>
+  </div>
+  <div class="stat">
+    <div class="label">住家被害（八代市）</div>
+    <div class="value">調査中</div>
+    <div class="sub">県資料では未分類50棟のみ。<b>応急危険度判定は8/1開始・被害認定調査は8/7開始予定</b></div>
+    <div class="asof">8/1 7:30 県資料／8/1 10:00 国交省</div>
+  </div>
+</div>
+<p class="stats-note">上の数字は<b>八代市分</b>です。出典は<a href="https://www.pref.kumamoto.jp/soshiki/222/274487.html">熊本県災害対策本部「人的被害等の状況」(8/1 7:30時点)</a>ほか。PDF本文を抽出し全列を合計行と突き合わせて検算しています。数値は速報値で今後変わります。
+<br><b>読むときの注意:</b> ①<b>負傷者</b>: 県の市町村別集計では八代市・宇城市とも負傷者が「0」ですが、負傷者がいないという意味ではなく<b>市町村別に計上されていない</b>とみられます（県内102人の大半が熊本市に計上）。このため「0人」ではなく「未計上」と表示しています。②<b>住家被害</b>: 八代市は分類未確定50棟のみの計上です。<b>被害認定調査がこれから</b>（8/7開始予定）のためで、被害が小さいという意味ではありません。
+<br>参考・県内全体（8/1 7:30時点）: 死者36人（八代市20・嘉島町7・氷川町4・宇城市2・甲佐町1＋関連調査中2）／負傷102人／避難者9,228人・避難所229か所／断水約72,000戸／住家被害 計1,543棟。</p>
+
+<!-- ================================================== -->
+<section id="hinan">
+  <h2>避難所・安全</h2>
+  <p class="sec-note">避難所は7/31に63か所→46か所へ再編（統合）されています。統合された避難所にいた方は統合先への移動が必要です。</p>
+  <div class="grid">
+    <div class="card span2">
+      <h3>避難所46か所を開設中（8/1 6:00現在） <span class="pill p-warn">水が使えるのは16か所のみ</span></h3>
+      <p>1,401世帯・3,806人が避難中。<b>電気とエアコンは46か所すべてで使えます</b>が、断水のため水が使えるのは16か所だけです。</p>
+      <p><b>水が使える16か所:</b> 八代トヨオカ地建アリーナ（総合体育館）／植柳コミュニティセンター／麦島コミュニティセンター／麦島小学校／第五中学校／八代市保健センター／金剛小学校／第六中学校／郡築コミュニティセンター／第七中学校／昭和小学校／今泉地区公民館／坂本コミュニティセンター／東陽コミュニティセンター及び東陽スポーツセンター／旧泉第一小学校／八代支援学校</p>
+      <p>主な避難所と避難者数: 八代トヨオカ地建アリーナ800人／第二中学校686人／第四中学校313人／第五中学校203人／鏡コミュニティセンター170人／太田郷コミュニティセンター120人／麦島コミュニティセンター120人／日奈久小学校104人。<b>全46か所の住所・収容人数・水／電気／エアコン／仮設トイレの可否は市のPDF一覧</b>で確認できます。</p>
+      <p class="meta"><b>問い合わせ:</b> 市役所 0965-33-4111</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326798/index.html">八代市 避難所開設状況（8/1 6:00現在）</a> / <a href="https://www.city.yatsushiro.lg.jp/kiji00326799/index.html">避難所の再編について（7/31時点）</a></p>
+    </div>
+    <div class="card">
+      <h3>避難所の再編で統合された場所 <span class="pill p-crit">移動が必要</span></h3>
+      <p>7/31時点で以下は統合されました（かっこ内が移動先）。太田郷小学校（第二中学校）／第三中学校（麦島コミセン）／八千把小学校（八千把コミセン）／郡築小学校（郡築コミセン）／日奈久中学校（日奈久コミセン）／二見小・二見中（二見コミセン）／坂本地区の6施設（坂本コミセン）／泉地区の3施設（旧泉第一小学校）／大島公民館（郡築コミセン）。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326799/index.html">八代市（7/31 3:00現在）</a></p>
+    </div>
+    <div class="card">
+      <h3>車中泊できる公園 <span class="pill p-warn">多くはトイレ使用不可</span></h3>
+      <p>市は避難・車中泊が可能な公園を60か所以上開放しています。ただし<b>断水のためトイレが使えない公園が多数</b>あります。一覧は市ページで確認してください。車中泊ではエコノミークラス症候群（血栓症）に注意し、こまめに体を動かし水分をとってください。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326775/index.html">八代市 災害時における避難・車中泊可能な公園のご案内 (7/30)</a></p>
+    </div>
+    <div class="card">
+      <h3>福祉避難所 <span class="pill p-warn">市の公表が見当たりません</span></h3>
+      <p>高齢者・障害のある方・医療的ケアが必要な方などの<b>福祉避難所について、8/1時点で八代市サイトに開設情報の掲載を確認できませんでした</b>（県・国の資料にも市町村別の記載なし）。個別の相談は総合相談窓口または障がい者支援課へ。県の「要配慮者等への宿泊施設提供事業」（二次避難所）は八代市も7/31から実施対象です。</p>
+      <p class="meta"><b>相談:</b> 総合相談窓口 0965-33-4452（平日9〜17時）／障がい者支援課 0965-35-0294</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326750/index.html">八代市 関連情報ページ（掲載なしを8/1に確認）</a> / <a href="https://www.pref.kumamoto.jp/soshiki/45/244416.html">熊本県 宿泊施設提供事業 (7/31)</a></p>
+    </div>
+    <div class="card">
+      <h3>猛暑と断水の中での健康管理 <span class="pill p-crit">重要</span></h3>
+      <p>熱中症警戒アラートが出ています。トイレを我慢するために水分を控えるのは危険です。長時間同じ姿勢を避け（エコノミークラス症候群）、断水下では手指衛生・食中毒にも注意を。市はチラシ「避難所・車中泊で健康に過ごすために」を配布しています。<b>救急車を呼ぶか迷ったら #7119</b>（子どもは #8000）。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326796/index.html">八代市 避難所・車中泊で健康に過ごすために (7/31)</a> / <a href="https://www.city.yatsushiro.lg.jp/kinkyu.html">八代市 緊急情報 (8/1 9:34)</a></p>
+    </div>
+    <div class="card">
+      <h3>自衛隊の支援船「はくおうII」が八代港へ</h3>
+      <p>入浴・宿泊・食事の支援ができる船舶「はくおうII」（約700人収容・大浴場あり）が八代港に派遣されました。海上自衛隊佐世保地方隊の入浴支援隊も八代港で活動（浴槽2つ・一度に約10人）。利用方法は市・県の案内を確認してください。</p>
+      <p class="src">出典: <a href="https://www.pref.kumamoto.jp/uploaded/attachment/315778.pdf">熊本県 第9回災対本部会議資料 (8/1 7:30時点)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="mizu">
+  <h2>水・給水</h2>
+  <p class="sec-note"><b>給水所と時間は日ごとに変わります。</b>必ず<a href="https://www.city.yatsushiro.lg.jp/kiji00326773/index.html">市の給水所情報ページ</a>で当日の最新版を確認してください。以下は8月1日の内容です。</p>
+  <div class="grid">
+    <div class="card span2">
+      <h3>応急給水所（8月1日・市内23か所） <span class="pill p-info">1回5リットル程度</span></h3>
+      <p><b>7:00〜19:00:</b> 第二中学校／代陽コミュニティセンター／八代小学校／八千把コミュニティセンター／太田郷コミュニティセンター／昭和コミュニティセンター／鏡コミュニティセンター／千丁コミュニティセンター／泉運動公園</p>
+      <p><b>8:30〜19:00:</b> 松高コミュニティセンター／第七中学校／第四中学校／宮地小学校／竜峯コミュニティセンター／日奈久小学校／金剛小学校／第六中学校／八代支援学校／日奈久コミュニティセンター／太田郷小学校</p>
+      <p><b>その他:</b> 第一中学校（10:30〜19:00）／八代市役所庁舎西側（10:45〜19:00）／八代港 港町97（11:00〜14:00予定）</p>
+      <p><b>給水容器（ポリタンク・ペットボトル等）を必ず持参してください。</b></p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326773/index.html">八代市 給水所情報（8/1 11:30更新）</a></p>
+    </div>
+    <div class="card">
+      <h3>生活用水の配布（イオン八代） <span class="pill p-warn">飲用不可</span></h3>
+      <p>イオン八代ショッピングセンター駐車場（八代市沖町六番割3987-3）で生活用水を配布。<b>8月1日（土）午後〜なくなり次第終了</b>、1回約10L。<b>飲料水としては使用できません</b>（トイレ・洗濯用）。給水容器を持参してください。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326797/index.html">八代市 生活用水の配布について</a></p>
+    </div>
+    <div class="card">
+      <h3>鏡町・千丁町・東陽町・泉町にお住まいの方へ</h3>
+      <p>この4町は<b>八代生活環境事務組合</b>が水道を所管しており、市水道局とは情報の出し元が違います。同組合も全域断水で応急給水所を開設中（八代市3か所・氷川町2か所、7:00〜19:00）。復旧は5段階で進めるとしていますが<b>完全復旧の時期は未定</b>です。</p>
+      <p class="src">出典: <a href="https://seikatsu.yatsushiro.jp/top/news/9577.html">八代生活環境事務組合</a> / <a href="https://www.city.yatsushiro.lg.jp/kiji00326787/index.html">八代市 (7/30)</a></p>
+    </div>
+    <div class="card">
+      <h3>断水の原因と復旧の見通し <span class="pill p-crit">見通し立たず</span></h3>
+      <p>市水道局によると、八代水系は古麓町で口径350〜500mmの大口径管からの漏水とみられる現場があり7/31から復旧に着手。日奈久水系は導水管3か所（高田病院前・敷川内空気弁・高速側道部）で漏水し配水池に貯水できていない状態。<b>「現時点では、いつ頃から上水道が使用できるという見通しが立たない」</b>と市が明記しています。管路の漏水が広範囲で資材不足・道路陥没も重なっています。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326789/index.html">八代市 上水道の被災状況と今後の対応（資料は7/30 16:00現在）</a></p>
+    </div>
+    <div class="card">
+      <h3>給水車27台が活動中</h3>
+      <p>八代市には給水車27台（国交省1・日本水道協会15・自衛隊11）が入っています。八代港では海上保安庁の巡視船や国交省の船舶（「海輝」「海煌」）による給水支援も行われています。</p>
+      <p class="src">出典: <a href="https://www.mlit.go.jp/common/002014899.pdf">国交省第15報 (8/1 9:30時点)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="lifeline">
+  <h2>電気・ガス・通信・トイレ</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>都市ガス: 8月3日（月）復旧目途 <span class="pill p-warn">復旧作業中</span></h3>
+      <p>九州ガス八代地区の8,892戸が供給停止中。復旧は<b>8月3日（月）目途</b>で、7/31から作業員が1軒ずつ訪問して開栓作業を行っています。<b>カセットコンロの配布</b>も実施。病院5か所・公共施設1か所へは移動式ガス発生設備で供給を再開済み。西部ガス・大阪ガスなど6社から約400人規模の応援が入っています。</p>
+      <p class="meta"><b>問い合わせ:</b> 九州ガス 八代エリア専用 0120-96-7791／コールセンター 0120-92-8623（平日8:50〜17:20）</p>
+      <p class="src">出典: <a href="https://www.kyugas.co.jp/kumamoto_info/49132/">九州ガス 第9報 (7/31)</a> / <a href="https://www.kyugas.co.jp/r8_kumamoto_info/">九州ガス 令和8年熊本地震情報</a></p>
+    </div>
+    <div class="card">
+      <h3>停電: ほぼ復旧 <span class="pill p-ok">解消</span></h3>
+      <p>八代市の停電は7/31朝時点で約2,460戸まで減り、九州電力は31日夕方までの復旧を公表。県内の停電は7/31夕方に解消したと報じられています。<b>切れた電線・垂れた電線には絶対に触らない</b>でください。最新は<a href="https://www.kyuden.co.jp/td_teiden/kyushu.html">九電送配電の停電情報</a>で確認できます。</p>
+      <p class="src">出典: <a href="https://www.bousai.go.jp/updates/r8kumamoto_jishin/pdf/r8kumamoto_jishin_20260731.pdf">内閣府 (7/31 6:30時点)</a> / <a href="https://kumanichi.com/life2026">熊日ライフライン情報</a></p>
+    </div>
+    <div class="card">
+      <h3>トイレ: 仮設トイレ・トイレカーが配備 <span class="pill p-crit">下水道も点検中</span></h3>
+      <p>市役所前に仮設トイレ10基を設置（庁舎内トイレが破損のため）。大阪府から水洗トイレカー（約800〜1,000回使用可）が派遣され、避難所にも仮設トイレ・トイレカーが集まっています。<b>し尿処理施設（八代生活環境事務組合）は稼働できず別施設で処理中</b>、下水道も点検中で県流域の八代北部浄化センターではマンホール周辺の陥没が発生しています。排水の可否は市へご確認ください。</p>
+      <p class="meta"><b>簡易トイレの問い合わせ:</b> 市民環境課 0965-33-4114</p>
+      <p class="src">出典: <a href="https://www.pref.kumamoto.jp/uploaded/attachment/315778.pdf">熊本県 第9回災対本部会議資料 (8/1 7:30時点)</a> / <a href="https://kumanichi.com/life2026">熊日ライフライン情報</a></p>
+    </div>
+    <div class="card">
+      <h3>携帯電話・通信 <span class="pill p-ok">復旧済み</span></h3>
+      <p>八代市を含む通信障害は7/30中に4社とも復旧（ソフトバンク12:47、ドコモ17:00、KDDI 19:24、楽天19:30頃）。<b>NTT西日本は八代市全域などで公衆電話を無料化</b>（7/29 15:00〜）。KDDIはStarlinkの無償提供・公衆無線LANと充電設備の設置も実施。携帯4社とも災害救助法適用地域向けにデータ無制限・追加データ無償化などの支援措置を行っています（対象・期限は各社で異なります）。</p>
+      <p class="src">出典: <a href="https://www.bousai.go.jp/updates/r8kumamoto_jishin/pdf/r8kumamoto_jishin_20260731.pdf">内閣府 (7/31)</a> / <a href="https://www.watch.impress.co.jp/docs/news/2129210.html">Impress Watch (7/30)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="omise">
+  <h2>お店・入浴・給油・郵便</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>入浴支援（無料）が7月31日から <span class="pill p-ok">実施中</span></h3>
+      <p>熊本県の入浴支援事業に八代市も7/31から参加。<b>避難所で生活中の方・自宅の入浴設備が被災した方</b>が協力公衆浴場を<b>無料</b>で利用できます。<b>市町村発行の証明書等を提示</b>し、石けん・タオルを持参、受付票に住所・氏名・年齢を記載します。ほかに道の駅 大野温泉が無料開放（10:00〜20:00、最終受付19:30）、坂本憩いの家でも入浴可。八代港では自衛隊の入浴支援も行われています。</p>
+      <p class="src">出典: <a href="https://www.pref.kumamoto.jp/soshiki/45/244416.html">熊本県 入浴支援事業 (7/31)</a> / <a href="https://kumanichi.com/life2026">熊日ライフライン情報 (8/1 10:00現在)</a></p>
+    </div>
+    <div class="card">
+      <h3>スーパーなどの営業状況</h3>
+      <ul>
+        <li><b>イオン八代店・マックスバリュ八代店:</b> 10:00〜17:00で営業（短縮）</li>
+        <li><b>ゆめタウン八代:</b> 休業中</li>
+        <li><b>鶴屋八代店:</b> 当面の間 営業休止</li>
+      </ul>
+      <p>最新の全県一覧は<a href="https://kumanichi.com/life2026">熊日ライフライン情報</a>で確認できます。</p>
+      <p class="src">出典: <a href="https://kumanichi.com/life2026">熊本日日新聞 ライフライン情報（8/1 10:40現在）</a></p>
+    </div>
+    <div class="card">
+      <h3>ガソリン: 供給は改善見通し</h3>
+      <p>7/31朝時点で市内45か所のうち<b>21か所が営業中</b>（営業停止10・確認中14）。八代油槽所からの出荷が7/30夕方から再開し、全国からタンクローリーが集結して<b>供給力は通常の数倍を確保できる見通し</b>と市が発表。電気の復旧に伴い、準備が整った給油所から順次再開しています。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326793/index.html">八代市 市内の給油見通しについて (7/31)</a> / <a href="https://www.bousai.go.jp/updates/r8kumamoto_jishin/pdf/r8kumamoto_jishin_20260731.pdf">内閣府 (7/31 6:30時点)</a></p>
+    </div>
+    <div class="card">
+      <h3>郵便・金融 <span class="pill p-warn">八代地域は休止が継続</span></h3>
+      <p>八代市宛て・八代市発の<b>ゆうパック等の引受は停止</b>、郵便物の取集・配達も八代局・東陽局・泉局などで休止が続いています。<b>ゆうちょ銀行八代支店も休止中</b>。肥後銀行・熊本銀行も八代地域の複数店舗が休業しています。通帳・印鑑を失っても本人確認で払い戻しできる特例があります（「お金の支援」参照）。</p>
+      <p class="src">出典: <a href="https://www.bousai.go.jp/updates/r8kumamoto_jishin/pdf/r8kumamoto_jishin_20260731.pdf">内閣府（総務省情報・7/31時点）</a> / <a href="https://kumanichi.com/life2026">熊日ライフライン情報</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="risai">
+  <h2>罹災証明・手続き</h2>
+  <p class="sec-note">り災証明書は支援金・応急修理・減免など多くの支援の前提になります。<b>片付ける前に被害状況の写真を撮っておくこと</b>が何より重要です。</p>
+  <div class="grid">
+    <div class="card span2">
+      <h3>り災証明書・被災証明書の申請 <span class="pill p-warn">オンライン8/3 13時から</span></h3>
+      <ul>
+        <li><b>オンライン申請:</b> <b>8月3日（月）13時から</b>受付開始予定（<a href="https://logoform.jp/form/zis6/1724496">申請フォーム</a>）。市は「オンライン申請が難しい方への支援を検討」としています</li>
+        <li><b>窓口申請:</b> <b>8月10日（月）を目途</b>に開始予定。開設予定は本庁、坂本・千丁・東陽・泉・鏡の各支所、日奈久出張所</li>
+        <li><b>被害写真</b>を片付け前に撮影しておくこと（現地調査を行う場合は写真添付は不要ですが、保険請求等に必要です）</li>
+        <li>住家被害認定調査は<b>8月7日開始予定</b>（国交省情報）</li>
+      </ul>
+      <p class="meta"><b>問い合わせ:</b> 市役所 0965-33-4111／総合相談窓口 0965-33-4452</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00324826/index.html">八代市 り災証明書・被災証明書について (7/31)</a> / <a href="https://www.mlit.go.jp/common/002014899.pdf">国交省第15報 (8/1)</a></p>
+    </div>
+    <div class="card">
+      <h3>片付け前に「被害写真」を <span class="pill p-crit">重要</span></h3>
+      <p>市は片付けを始める前に写真を撮るよう呼びかけています。<b>建物全景（4方向）</b>と<b>室内の被害・家財</b>を撮影してください。保険請求やり災証明書の申請に必要です。<b>撮影は必ず安全を最優先に</b>行ってください。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326754/index.html">八代市からのお知らせ (7/29)</a></p>
+    </div>
+    <div class="card">
+      <h3>被災者支援 総合相談窓口 <span class="pill p-ok">開設中</span></h3>
+      <p>各種支援制度についてまとめて相談できる窓口が<b>市役所本庁舎2階（市民相談室横）</b>に7/29から開設されています。<b>平日9:00〜17:00</b>。電話相談も同じ時間帯で受け付けています。何から手をつければよいか分からないときは、まずここへ。</p>
+      <p class="meta"><b>電話:</b> <a href="tel:0965334452">0965-33-4452</a></p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326749/index.html">八代市 被災者支援に関する総合相談窓口 (7/30)</a></p>
+    </div>
+    <div class="card">
+      <h3>市役所の窓口は縮小中 <span class="pill p-warn">注意</span></h3>
+      <p>本庁舎は当面、窓口数・職員数が少ない状況です。用件によっては担当課の直通電話が早い場合があります（一覧は市ページ）。建築確認申請等の受付は約1か月停止中（応急仮設建築物の許可は除く）。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326790/index.html">八代市 本庁舎の窓口対応について (7/31)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="okane">
+  <h2>お金の支援</h2>
+  <p class="sec-note">「制度としてあること」と「八代市で受付が始まったこと」は違います。以下は区別して記載しています。</p>
+  <div class="grid">
+    <div class="card">
+      <h3>災害救助法が八代市に適用済み</h3>
+      <p>7/28付で熊本県内21市町村（八代市を含む10市10町1村）に災害救助法が適用されました。避難所運営・応急仮設住宅・住宅の応急修理・医療などの費用を国と県が負担する枠組みが発動しています。携帯料金の減免など民間の支援も、この適用地域が対象になっているものが多くあります。</p>
+      <p class="src">出典: <a href="https://www.pref.kumamoto.jp/soshiki/27/274494.html">熊本県 (7/28)</a> / <a href="https://www.bousai.go.jp/pdf/260728.pdf">内閣府 (7/28)</a></p>
+    </div>
+    <div class="card">
+      <h3>金融の特例: 通帳・印鑑がなくても手続きできます</h3>
+      <p>九州財務局・日銀が金融機関に要請済み。通帳・印鑑を失っても本人確認で<b>預金の払い戻し</b>が可能、保険証券がなくても<b>保険金請求</b>可・迅速支払い、既存ローンの<b>返済猶予</b>相談など。困ったときは<b>金融庁相談ダイヤル 0120-156811</b>（平日10〜17時）へ。</p>
+      <p class="src">出典: <a href="https://www.boj.or.jp/about/bcp/fso/fso260729a.pdf">九州財務局・日銀熊本支店 (7/29)</a> / <a href="https://www.fsa.go.jp/news/r8/sonota/20260729/soudan.html">金融庁 (7/29)</a></p>
+    </div>
+    <div class="card">
+      <h3>住宅ローン等が払えないとき（被災ローン減免制度）</h3>
+      <p>「自然災害債務整理ガイドライン」により、破産によらず・信用情報に登録されずに債務減免を受けられる可能性があります。<b>最も借入残高の多い金融機関に申し出</b>てください（弁護士等の支援を無料で受けられます）。住宅金融支援機構の融資は災害専用ダイヤル 0120-086-353（土日も9〜17時）。</p>
+      <p class="src">出典: <a href="https://www.jhf.go.jp/topics/saigai_20260729.html">住宅金融支援機構 (7/29)</a> / <a href="https://www.boj.or.jp/about/bcp/fso/fso260729a.pdf">九州財務局・日銀 (7/29)</a></p>
+    </div>
+    <div class="card">
+      <h3>県税・市税の減免 <span class="pill p-warn">八代市分は未発表</span></h3>
+      <p>県税（個人事業税・不動産取得税・自動車税）は申請により減免・納税猶予の相談ができます（県税務課 096-333-2098）。市税・水道料金の減免について、<b>八代市の個別発表は8/1時点で確認できていません</b>。</p>
+      <p class="src">出典: <a href="https://www.pref.kumamoto.jp/soshiki/16/243528.html">熊本県税務課 (7/31)</a>（八代市分は未発表を8/1に確認）</p>
+    </div>
+    <div class="card">
+      <h3>被災者生活再建支援金 <span class="pill p-warn">適用公表は未確認</span></h3>
+      <p>住宅が全壊等した世帯への支援金（最大300万円）の前提となる<b>被災者生活再建支援法の今回の適用について、8/1時点で公式発表を確認できていません</b>。受付開始は市の公式発表を待ってください。</p>
+      <p class="src">出典: 内閣府・熊本県のページで8/1時点の発表を確認できず</p>
+    </div>
+    <div class="card">
+      <h3>携帯電話料金の支援 <span class="pill p-ok">適用中</span></h3>
+      <p>災害救助法適用地域（八代市を含む）の契約者向けに、ドコモ＝災害時データ無制限モード自動適用、au／UQ／povo＝速度制限解除・データ付与、ソフトバンク＝データ追加購入無償化、楽天＝SIM再発行無料など。修理代減免・支払期限延長もありますが、<b>対象と期限は会社・措置ごとに異なります</b>。各社公式で確認してください。</p>
+      <p class="src">出典: <a href="https://www.watch.impress.co.jp/docs/news/2129210.html">Impress Watch (7/30)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="sumai">
+  <h2>住まい</h2>
+  <div class="grid">
+    <div class="card span2">
+      <h3>賃貸型応急住宅（みなし仮設）— 八代市も対象 <span class="pill p-warn">市の受付窓口は調整中</span></h3>
+      <p>民間賃貸住宅を県が借り上げて提供する制度で、八代市も対象です。<b>入居期間は2年</b>（応急修理制度と併用の場合は原則6か月）。</p>
+      <p><b>家賃上限:</b> 単身5.5万円／2人6.5万円／3〜4人8.5万円／5人以上13万円。県が家賃・共益費・礼金・仲介手数料・火災保険料・鍵交換費用を負担し、光熱水費・駐車場費・自治会費は入居者負担。</p>
+      <p><b>主な要件:</b> 7/28時点で市内に住所がある／住宅が全壊・半壊等で住めない、またはライフライン途絶で長期に住めないと市長が認める／自らの資力では住居を確保できない。<b>すでに個人で契約済みでも、要件を満たし貸主の同意があれば入居日に遡って対象</b>になる場合があります。</p>
+      <p class="meta"><b>問い合わせ:</b> 熊本県 健康福祉政策課 すまい・生活再建支援班 096-333-2819（八代市の受付窓口は8/1時点で調整中）</p>
+      <p class="src">出典: <a href="https://www.pref.kumamoto.jp/soshiki/27/275223.html">熊本県 賃貸型応急住宅 (7/31更新)</a></p>
+    </div>
+    <div class="card">
+      <h3>住宅の緊急修理（ブルーシート等） <span class="pill p-crit">期限に注意</span></h3>
+      <p>半壊・準半壊相当で雨水の浸入を放置すると被害が拡大する住宅に、ブルーシート展張・ベニヤ板補修・落下防止ネット等を<b>現物給付</b>で実施。<b>1世帯56,400円以内</b>。<b>災害発生の日から10日以内に完了</b>とされており、7/28発災のため<b>8月6日頃が目安</b>です（延長される場合あり）。八代市も対象。被害状況の写真を用意して市の窓口へ（県は「準備が完了した市町村から順次窓口開設予定」としています）。</p>
+      <p class="src">出典: <a href="https://www.pref.kumamoto.jp/soshiki/27/274885.html">熊本県 住宅の緊急修理 (7/31更新)</a></p>
+    </div>
+    <div class="card">
+      <h3>応急危険度判定が8月1日から <span class="pill p-info">実施中</span></h3>
+      <p>被災した建物が当面使えるかを判定する<b>応急危険度判定</b>が、8月1日から八代市で始まりました（宇城市・氷川町は7/29から）。判定結果（危険／要注意／調査済）は建物の当面の使用可否を示すもので、<b>り災証明のための被害認定調査とは別のもの</b>です。</p>
+      <p class="src">出典: <a href="https://www.mlit.go.jp/common/002014899.pdf">国交省第15報 (8/1 10:00時点)</a></p>
+    </div>
+    <div class="card">
+      <h3>住宅の応急修理（本格）・建設型仮設住宅 <span class="pill p-warn">八代市は未発表</span></h3>
+      <p>半壊以上で最大757,000円の応急修理制度、およびプレハブ等の建設型応急住宅について、<b>八代市での受付・建設計画は8/1時点で発表を確認できていません</b>。県は建設型応急住宅の整備に向けた事前準備調整を開始しています。今後の発表を確認してください。</p>
+      <p class="src">出典: 八代市・熊本県のページで8/1時点の発表を確認できず</p>
+    </div>
+    <div class="card">
+      <h3>「無料点検」商法・保険金請求代行に注意 <span class="pill p-crit">詐欺警戒</span></h3>
+      <p>「屋根を無料点検します」と訪問して不安をあおる高額工事、「火災保険で自己負担なし」とうたう請求代行セット契約などの便乗商法に注意。契約前に複数業者から見積もりを取り、損保会社へ直接相談を。訪問販売はクーリング・オフできます。相談は<b>188</b>（消費者ホットライン）・<b>#9110</b>（警察）。</p>
+      <p class="src">出典: <a href="https://www.itmedia.co.jp/news/article/2607/29/2000000280/">警察庁注意喚起 (7/29)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="iryo">
+  <h2>医療・健康</h2>
+  <div class="grid">
+    <div class="card span2">
+      <h3>八代市内の主な病院の状況 <span class="pill p-warn">受診前に電話確認を</span></h3>
+      <div class="tbl-wrap"><table>
+        <tr><th>医療機関</th><th>状況</th></tr>
+        <tr><td>熊本労災病院</td><td>外来診療・手術が困難（7/29時点）</td></tr>
+        <tr><td>JCHO熊本総合病院</td><td>通常診療は休診、<b>救急と定期処方のみ</b>対応（7/29時点）</td></tr>
+        <tr><td>桜十字八代リハビリテーション病院</td><td><b>8月3日から外来診療を再開</b></td></tr>
+        <tr><td>桜十字八代病院</td><td>医療・介護サービス継続。面会は14:00〜16:30に制限</td></tr>
+        <tr><td>八代更生病院</td><td>7/29の外来を休診、予定入院の受け入れも一時中止</td></tr>
+      </table></div>
+      <p>八代市の医療施設は<b>最大25施設が被災し、8/1 10:30時点でも14施設に影響</b>（うち断水14施設）が残っています。県内最多です。状況は変わるため、<b>受診前に必ず各医療機関へ電話</b>してください。休日当番医は8月分に変更があります。</p>
+      <p class="meta"><b>救急を呼ぶか迷ったら:</b> #7119（子どもは #8000）／<b>八代市医師会テレホンサービス:</b> 0965-34-7001</p>
+      <p class="src">出典: <a href="https://www.mhlw.go.jp/content/001732278.pdf">厚労省第24報 (8/1 10:30時点)</a> / <a href="https://www.city.yatsushiro.lg.jp/kiji00326609/index.html">八代市 8月の休日当番医の変更 (7/31)</a></p>
+    </div>
+    <div class="card">
+      <h3>保険証がなくても受診できます <span class="pill p-ok">特例適用中</span></h3>
+      <p>マイナ保険証・資格確認書を持ち出せなくても、窓口で<b>氏名・生年月日・連絡先などを伝えれば保険診療で受診できます</b>。介護サービスも被保険者証なしで利用可、障害福祉サービスも受給者証なしで利用できます。窓口負担の減免・猶予も保険者の判断で可能です。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326779/index.html">八代市 (7/30)</a> / <a href="https://www.city.yatsushiro.lg.jp/kiji00326778/index.html">八代市 介護サービス (7/30)</a></p>
+    </div>
+    <div class="card">
+      <h3>薬・薬局</h3>
+      <p>八代市の薬局は30施設が被災（建物被害21・断水14・停電7）。<b>休日当番薬局は市が公表</b>しており、8月2日（日）は中村調剤薬局（0965-35-4007）、ヱビス薬局本町店（0965-37-8288）ほか（9:00〜17:00）。お薬手帳や薬の包装を持参すれば、処方箋がなくても調剤を受けられる特例があります（〜8/31）。マイナカードがなくても薬剤情報を参照できる緊急時機能も稼働中。</p>
+      <p class="src">出典: <a href="https://www.mhlw.go.jp/content/001732278.pdf">厚労省第24報 (7/31 14:00時点)</a> / <a href="https://www.city.yatsushiro.lg.jp/kiji00326609/index.html">八代市 休日当番医・当番薬局</a></p>
+    </div>
+    <div class="card">
+      <h3>医療・福祉チームが活動中</h3>
+      <p>県内でDMAT117隊・DPAT（精神医療）17隊が活動中。八代保健所・八代市にはDHEAT（健康危機管理支援）と保健師チームが入り、<b>8月2日から5府県の保健師チームが対口支援</b>に入ります。ジャパンハートが太田郷コミュニティセンターに医療相談ブースを設置。避難所の栄養支援にJDA-DATも派遣されています。人工透析は県内7施設が実施困難ですが<b>全て他院での透析を手配済み</b>です。</p>
+      <p class="src">出典: <a href="https://www.mhlw.go.jp/content/001732278.pdf">厚労省第24報 (8/1 11:30現在)</a></p>
+    </div>
+    <div class="card">
+      <h3>こころのケア・相談窓口</h3>
+      <p>不安や不眠が続くときは相談してください。熊本県精神保健福祉センター「こころの健康相談電話」096-386-1166（平日9〜16時）。障害のある方には<b>24時間無償の遠隔手話通訳・代理電話サービス</b>があります。八代市の障がい者支援課は 0965-35-0294。外国人市民向けには熊本県外国人サポートセンターの多言語支援があります。</p>
+      <p class="src">出典: <a href="https://www.pref.kumamoto.jp/soshiki/39/274727.html">熊本県 障がいのある方への支援 (7/29)</a> / <a href="https://www.city.yatsushiro.lg.jp/kiji00326781/index.html">八代市 遠隔手話通訳 (7/30)</a></p>
+    </div>
+    <div class="card">
+      <h3>ペットの相談</h3>
+      <p>被災したペットについての相談窓口が案内されています。熊本県動物愛護センターの犬猫相談専用ダイヤル 0964-27-8115（平日9〜16時）。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326764/index.html">八代市 ペットの相談窓口 (7/29)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="kodomo">
+  <h2>こども・学校</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>保育園・こども園・学童 <span class="pill p-warn">7/30以降の方針が未掲載</span></h3>
+      <p>市は7月29日に市内の保育園・認定こども園・子育て支援センター・放課後児童クラブを<b>全施設臨時休園</b>としました。<b>7月30日以降の方針は8/1時点で市サイトに掲載を確認できていません</b>。通園先へ直接ご確認ください。</p>
+      <p class="meta"><b>問い合わせ:</b> 市役所 0965-33-4111</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326743/index.html">八代市 (7/28)</a>（7/30以降の掲載なしを8/1に確認）</p>
+    </div>
+    <div class="card">
+      <h3>乳幼児健診などは当面中止</h3>
+      <p>乳幼児健診・子育て支援事業は当面中止です。<b>母子健康手帳の交付は予約制で継続</b>しています。相談は市役所2階10番窓口または鏡保健センターへ。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326751/index.html">八代市 乳幼児健診などの中止のお知らせ (7/31)</a></p>
+    </div>
+    <div class="card">
+      <h3>学校の被害 <span class="pill p-crit">龍峯小は立入禁止</span></h3>
+      <p>八代市立<b>龍峯小学校</b>はグラウンドの地割れ・校舎損傷で立入禁止となり、市教委は<b>「2学期の学校再開が難しい可能性がある」</b>としています。学校活動中に八代地域で児童生徒3名が負傷（部活動中のトタン屋根崩落）。市内すべての学校体育施設（体育館・運動場）は当分の間、一般利用を停止しています。</p>
+      <p class="src">出典: <a href="https://www.pref.kumamoto.jp/uploaded/attachment/315778.pdf">熊本県 第9回災対本部会議資料 (8/1)</a> / <a href="https://www.city.yatsushiro.lg.jp/kiji00326744/index.html">八代市 学校体育施設の利用制限 (7/29)</a></p>
+    </div>
+    <div class="card">
+      <h3>こどもの居場所（8/1〜8/9）</h3>
+      <p>認定NPO法人カタリバが「みんなのこども部屋＠植柳下二自治公民館」を八代市に開設しています（8月1日〜9日）。</p>
+      <p class="src">出典: 認定NPO法人カタリバ（7/31発表。開設場所・期間は報道等で確認したもので、団体公式の告知ページは未確認）</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="gomi">
+  <h2>災害ごみ</h2>
+  <div class="grid">
+    <div class="card span2">
+      <h3>災害廃棄物の仮置場は8月3日から <span class="pill p-info">開設予定</span></h3>
+      <ul>
+        <li><b>場所:</b> 八代市水処理センター西側（八代市新港町3丁目1番地）※搬入は<b>港町方面ルートのみ</b></li>
+        <li><b>期間:</b> 8月3日（月）〜12月末　※<b>毎週木曜日は受入休止</b></li>
+        <li><b>時間:</b> 9:00〜11:30／13:00〜16:00</li>
+        <li><b>持ち物:</b> 身分証（免許証・マイナンバーカード等）。代理搬入は委任状（任意様式・台数分のコピー可）</li>
+        <li><b>受入品目（14品目）:</b> ガラス・陶磁器くず／コンクリートがら／瓦／木くず／廃プラスチック／家具類／たたみ／布団類／小型家電／家電リサイクル4品目／金属くず／石膏ボード／スレート／サイディング。<b>品目ごとに必ず分別</b>してください</li>
+        <li><b>受入不可:</b> 生ごみ・生活ごみ</li>
+        <li>開設直後は<b>大渋滞が予想され、場内の状況により早く打ち切る</b>ことがあります</li>
+      </ul>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00324627/index.html">八代市 災害廃棄物仮置場の設置 (7/31)</a></p>
+    </div>
+    <div class="card">
+      <h3>普段のごみ収集</h3>
+      <p>市は「可能な限り収集を行う」としていますが、道路状況により回収できない場合があります。<b>可能な限り自宅で保管し、生ごみなど必要最低限のごみ出しに</b>協力するよう呼びかけています。「エコエイトやつしろ」への持ち込みと緑地広場の利用は停止中です。</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326738/index.html">八代市 (7/28)</a> / <a href="https://www.city.yatsushiro.lg.jp/kiji00326742/index.html">八代市 エコエイトやつしろ (7/29)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="kotsu">
+  <h2>交通（8月1日時点）</h2>
+  <div class="grid">
+    <div class="card span2">
+      <div class="tbl-wrap"><table>
+        <tr><th>交通機関</th><th>状況</th></tr>
+        <tr><td>JR鹿児島本線<br>（宇土〜八代）</td><td><b>当面の間 運行取り止め。「8月中の運行再開は困難」</b>とJR九州が明記。バス代行も「道路の被災状況が把握できずバス確保も困難」で計画未定。熊本〜宇土と三角線は8月2日に再開予定</td></tr>
+        <tr><td>九州新幹線</td><td>熊本〜鹿児島中央が運行取り止め（<b>新八代駅を含む区間</b>）。博多〜熊本は運転再開済み</td></tr>
+        <tr><td>肥薩おれんじ鉄道</td><td><b>全線（八代〜川内）で運転見合わせ</b>。復旧に時間を要する見込み。八代本社が被災し、問い合わせは出水営業部へ</td></tr>
+        <tr><td>市内のバス・乗合タクシー</td><td>市街地循環バス・一般路線バスは<b>全便運休</b>。乗合タクシーも一部路線を除き全便運休（運行中: 平和町線、日奈久温泉ライン（金剛経由）、産島線、種山線ほか）。産交バス八代営業所の窓口も当面休業</td></tr>
+        <tr><td>高速道路</td><td>E3九州道 松橋IC〜えびのIC の6区間、<b>E3A南九州道 八代JCT〜田浦IC の3区間</b>が通行止め（日奈久IC〜田浦ICは緊急車両のみ通行可）。九州道 宮原SA〜坂本PAは<b>8月お盆前後</b>に緊急車両通行可となる見込み</td></tr>
+        <tr><td>一般道</td><td>国道219号 新萩原橋が橋梁損傷で通行止め。県管理道路では八代鏡線・八代不知火線・中津道八代線も通行止め。最新は<a href="https://www.qsr.mlit.go.jp/bousai_joho/r80728kumamotozisinn.html">九州地方整備局「通れるマップ」</a>で確認を</td></tr>
+        <tr><td>八代港</td><td>ヤードの液状化・ガントリークレーン損傷で外港地区の荷役は休止中。一方で<b>支援物資の受入拠点として一部再開</b>し、海保巡視船・自衛隊支援船を受け入れ</td></tr>
+      </table></div>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326748/index.html">八代市 公共交通の運休について (8/1)</a> / <a href="https://www.jrkyushu.co.jp/common/inc/news/newtopics/__icsFiles/afieldfile/2026/07/31/260731_kumamotojishin_2.pdf">JR九州 (7/31発表PDF)</a> / <a href="https://www.mlit.go.jp/common/002014899.pdf">国交省第15報 (8/1 9:30時点)</a> / <a href="https://www.pref.kumamoto.jp/uploaded/attachment/315778.pdf">熊本県 第9回災対本部会議資料 (8/1)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="jigyo">
+  <h2>事業者・支援したい方へ</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>個人からの救援物資は受け入れ停止 <span class="pill p-warn">企業は事前連絡制</span></h3>
+      <p>八代市は<b>個人からの救援物資の受け入れを停止</b>しています。企業からの物資提供は事前電話連絡制で募集中（受付9:00〜16:00）。募集品目は飲料・レトルト食品・ベビーフード（賞味期限2か月以上）、衣類・生活用品（新品に限る）、携帯トイレ・パーテーション・スポットクーラー・発電機など。</p>
+      <p class="meta"><b>物資提供の連絡先:</b> 商工政策課 0965-33-8513</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326767/index.html">八代市 企業様からの物資提供のお願い (8/1)</a></p>
+    </div>
+    <div class="card">
+      <h3>支援の申し出先一覧（八代市）</h3>
+      <ul>
+        <li>支援物資（飲食料含む）: 0965-33-8513</li>
+        <li>簡易トイレ: 0965-33-4114</li>
+        <li>義援金: 0965-33-8721</li>
+        <li>寄付金: 0965-33-4106</li>
+        <li>ボランティア: 0965-33-4003</li>
+        <li>炊き出し: 0965-33-8751</li>
+      </ul>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326786/index.html">八代市 支援物資等の受入窓口 問合せ先一覧 (7/30)</a></p>
+    </div>
+    <div class="card">
+      <h3>中小企業向けの相談窓口</h3>
+      <p>被災した中小企業・小規模事業者向けに、セーフティネット保証4号（別枠100%保証）、災害復旧貸付、既往債務の返済条件緩和などが適用されています。熊本県の特別相談窓口は<b>土日祝も8:30〜17:15</b>で対応（金融 096-333-2314／経営 096-333-2326）。</p>
+      <p class="src">出典: <a href="https://www.pref.kumamoto.jp/soshiki/61/274549.html">熊本県 (7/29)</a> / <a href="https://j-net21.smrj.go.jp/news/bt5puv000000prhn.html">経産省発表 (7/29)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="volunteer">
+  <h2>ボランティア・義援金</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>八代市災害ボランティアセンター <span class="pill p-warn">準備中</span></h3>
+      <p>八代市社会福祉協議会が受入れ・活動体制を整備中で、<b>8/1時点で開設日時・募集方法・受付場所はいずれも未公表</b>です。県社協は「安全が確保されしだい募集」としており、応急危険度判定の進捗待ちの状況です。開設情報は市ホームページと八代市社協Facebookで告知されます。<b>問い合わせは業務の支障になるため控えて</b>、公式告知をお待ちください。</p>
+      <p class="meta"><b>ボランティアの問い合わせ先:</b> 0965-33-4003</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326762/index.html">八代市 災害ボランティアセンターの開設について (7/31)</a></p>
+    </div>
+    <div class="card span2">
+      <h3>八代市への義援金・寄附金 <span class="pill p-ok">受付中</span></h3>
+      <p>八代市は<b>7月31日から独自に義援金・寄附金の受付を開始</b>しました（配分の時期・金額は未定）。</p>
+      <ul>
+        <li><b>オンライン:</b> <a href="https://logoform.jp/form/zis6/1723897">義援金の申込フォーム</a>／<a href="https://logoform.jp/f/qG972">寄附金の申込フォーム</a></li>
+        <li><b>振込:</b> 肥後銀行本店・支店、八代市役所会計課窓口、九州管内のゆうちょ銀行・郵便局、八代市内に支店を持つ銀行・信用金庫・信用組合・農協・労働金庫</li>
+        <li><b>ふるさと納税:</b> 7月31日12時から受付開始。ふるさとチョイス（2026年12月31日まで・返礼品なし・代理寄付あり）、さとふる、楽天ふるさと納税など<b>11のポータルサイト</b>で受付中</li>
+        <li><b>企業版ふるさと納税</b>も受付中</li>
+      </ul>
+      <p>このほか、熊本県の義援金（7/29〜10/30）、日本赤十字社（7/31〜10/30）、熊本県共同募金会（配分先21市町村に八代市が明記）でも受け付けています。</p>
+      <p class="meta"><b>問い合わせ:</b> 義援金 0965-33-8721／寄附金 0965-33-4106</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326782/index.html">八代市 義援金・寄附金の受付開始 (7/31)</a> / <a href="https://www.city.yatsushiro.lg.jp/kiji00324662/index.html">八代市 ふるさと納税による支援寄附金 (8/1)</a></p>
+    </div>
+    <div class="card">
+      <h3>炊き出しを検討している方へ</h3>
+      <p>市は炊き出しについて<b>「自己完結型」</b>（実施団体が会場を調整する方式）としており、市が実施場所・日程を一括で公表する方式は取っていません。実施を検討している場合は農林水産対策部へご連絡ください。</p>
+      <p class="meta"><b>炊き出しの連絡先:</b> 0965-33-8751</p>
+      <p class="src">出典: <a href="https://www.city.yatsushiro.lg.jp/kiji00326785/index.html">八代市 炊き出し支援をご検討いただいている皆様へ (8/1)</a></p>
+    </div>
+    <div class="card">
+      <h3>義援金詐欺に注意 <span class="pill p-crit">詐欺警戒</span></h3>
+      <p>公的機関や支援団体をかたって現金・電子マネー・暗号資産をだまし取る手口、被災者の身内を装う送金要求などが確認されています。<b>寄付先が不透明な募金は詐欺の可能性</b>があります。寄付前に公式サイトで口座名義を確認し、怪しいと思ったら<b>#9110</b>へ。</p>
+      <p class="src">出典: <a href="https://www.itmedia.co.jp/news/article/2607/29/2000000280/">警察庁注意喚起 (7/29)</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="mikakunin">
+  <h2>まだ確認できていないこと（8月1日時点）</h2>
+  <div class="unconfirmed">
+    <h3>正直な情報整理のため、「未発表・未確認」の事項を明示します</h3>
+    <ul>
+      <li><b>断水の復旧見通し:</b> 市が「いつ再開できるか見通しが立たない」と明言。長期化の恐れ</li>
+      <li><b>在宅避難・車中泊の方向けの食料・生活物資の配布拠点:</b> 市サイトに<b>受け取る側向けの案内が1件もありません</b>。公式に使えるのは応急給水所（水のみ・1回5L）、生活用水配布（飲用不可）、避難所の3系統。食料について困っている場合は商工政策課 0965-33-8513 または総合相談窓口 0965-33-4452へ</li>
+      <li><b>福祉避難所:</b> 市・県・国のいずれの資料にも開設情報の記載を確認できず</li>
+      <li><b>避難指示の解除・切替:</b> 7/28 18:00の全域発令以降、解除の告知を確認できず</li>
+      <li><b>保育園・こども園・学童の7/30以降の方針:</b> 市サイトに掲載なし</li>
+      <li><b>り災証明の窓口申請:</b> 8月10日目途（オンラインは8月3日13時から）</li>
+      <li><b>被災者生活再建支援法の適用:</b> 公式発表を確認できず</li>
+      <li><b>住宅の応急修理（本格・最大757,000円）・建設型仮設住宅:</b> 八代市での受付・計画は未発表</li>
+      <li><b>市税・水道料金の減免:</b> 八代市の個別発表は未確認</li>
+      <li><b>災害ボランティアセンターの開設日:</b> 準備中</li>
+      <li><b>2学期の学校再開:</b> 龍峯小は「再開が難しい可能性」とされ、対応を検討中</li>
+    </ul>
+    <p style="font-size:12.5px; color:var(--muted); margin:8px 0 0">これらは「存在しない」ことの断定ではなく、2026年8月1日の調査時点で公式発表を発見できなかったという記録です。数日内に発表される可能性が高い項目を含みます。</p>
+  </div>
+</section>
+
+<!-- ================================================== -->
+<section id="links">
+  <h2>一次情報リンク集</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>八代市</h3>
+      <ul>
+        <li><a href="https://www.city.yatsushiro.lg.jp/kiji00326750/index.html">令和8年熊本地震 関連情報（総合まとめ）</a></li>
+        <li><a href="https://www.city.yatsushiro.lg.jp/kinkyu.html">緊急情報（随時更新）</a></li>
+        <li><a href="https://www.city.yatsushiro.lg.jp/bousai/default.html">八代市防災サイト</a></li>
+        <li><a href="https://www.city.yatsushiro.lg.jp/kiji00326773/index.html">給水所情報（日ごとに更新）</a></li>
+        <li><a href="https://www.city.yatsushiro.lg.jp/kiji00326798/index.html">避難所開設状況</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>熊本県・国</h3>
+      <ul>
+        <li><a href="https://www.pref.kumamoto.jp/soshiki/1/274517.html">熊本県 特設ページ</a> ／ <a href="https://www.pref.kumamoto.jp/soshiki/222/274487.html">県災害対策本部（被害状況報）</a></li>
+        <li><a href="https://www.bousai.go.jp/updates/r8kumamoto_jishin/index.html">内閣府防災</a></li>
+        <li><a href="https://www.jma.go.jp/jma/menu/20260728_kumamoto_jishin.html">気象庁ポータル</a></li>
+        <li><a href="https://www.mhlw.go.jp/stf/newpage_75017.html">厚生労働省（医療・保険の特例）</a></li>
+        <li><a href="https://www.qsr.mlit.go.jp/bousai_joho/r80728kumamotozisinn.html">九州地方整備局（道路・通れるマップ）</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>ライフライン・生活</h3>
+      <ul>
+        <li><a href="https://seikatsu.yatsushiro.jp/top/news/9577.html">八代生活環境事務組合（鏡・千丁・東陽・泉の水道）</a></li>
+        <li><a href="https://www.kyugas.co.jp/kumamoto_info/49132/">九州ガス（都市ガス）</a></li>
+        <li><a href="https://www.kyuden.co.jp/td_teiden/kyushu.html">九州電力送配電 停電情報</a></li>
+        <li><a href="https://kumanichi.com/life2026">熊本日日新聞 ライフライン情報</a>（お店・浴場・金融など）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><b>このダッシュボードについて:</b> 2026年8月1日時点で、八代市・熊本県・国（内閣府/厚労省/国交省ほか）・ライフライン各社・交通各社・報道・支援団体の公式発表を横断調査し、原則として「本文まで確認できた情報」のみを掲載しています。本文まで確認できなかった項目は「未確認」と明示しています。</p>
+  <p>被害数値はすべて速報値であり、時点により異なります（各項目に時点を明記）。行動の前に必ず出典リンク先の最新情報を確認してください。</p>
+  <p><b>作成: 小金井市 永鳥太郎</b> ／ 作成日: 2026-08-01 ／ 最終裏取り: 2026-08-01 13:30 JST ／ 出典は各項目に記載</p>
+  <p>本ページは生成AIを用いて公開情報を収集・整理した<b>非公式のまとめ</b>です。八代市および関係機関の公式発表ではありません。誤り・古い情報が含まれる可能性があるため、<b>行動の前に必ず公式の一次情報をご確認ください</b>。</p>
+  <p>宇城市版もあります: <a href="https://toritarosan.github.io/uki-shien-dashboard/">宇城市 災害支援情報ダッシュボード</a></p>
+</footer>
+</div>
+</body>
+</html>
