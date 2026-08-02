@@ -7,7 +7,7 @@
 **都市ガス8,892戸の供給停止**など、今回の地震で最も深刻な被害を受けた自治体の一つ。
 
 - **公開URL**: https://toritarosan.github.io/yatsushiro-shien-dashboard/
-- **情報の時点**: 2026-08-02 09:49 JST（各項目に出典と時刻を明記）
+- **情報の時点**: 2026-08-02 09:58 JST（各項目に出典と時刻を明記）
 - **構成**: `index.html` 1ファイル完結（外部依存なし・ビルド不要）
 - **姉妹版**: [宇城市版](https://toritarosan.github.io/uki-shien-dashboard/)（[リポジトリ](https://github.com/toritarosan/uki-shien-dashboard)）
 
