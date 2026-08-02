@@ -74,6 +74,28 @@
 - 情報の更新日時、発表日時、制度の開始日・受付期間を区別して記載する。
 - 携帯各社など複数事業者の期限を一律化しない。
 
+## GPT（ChatGPT / gpt-5.6-sol）による検証ゲート
+
+自動巡回が作ったPRは、マージ前に**GPTで敵対的ファクトチェックできる**。
+クラウドの自動巡回環境にはCodex CLIもOpenAI認証も無いため、この検証は**ローカルで実行する**。
+
+```bash
+# PRの差分だけ検証（マージ判断向け・数分）
+python C:/Users/Taro/Dropbox/claudesandbox/gpt_verify.py yatsushiro --pr 4
+
+# ページ全文を検証
+python C:/Users/Taro/Dropbox/claudesandbox/gpt_verify.py yatsushiro
+
+# Web検索で一次資料まで突合（重い・20〜30分）
+python C:/Users/Taro/Dropbox/claudesandbox/gpt_verify.py yatsushiro --deep
+```
+
+レポートは `claudesandbox/reports/` に保存される。チェック項目は、これまで実際に検出された誤りの型
+（出典名の取り違え・別災害の混入・列の読み違い・推測の混入・時点の齟齬など）をそのまま入れてある。
+
+**推奨フロー**: 自動巡回 → PR作成 → `gpt_verify.py --pr N` → 指摘を反映 → 人が判断してマージ。
+GPTの指摘も鵜呑みにせず、一次情報で裏を取ってから直すこと。
+
 ## 次回更新手順
 
 1. 八代市の[関連情報ページ](https://www.city.yatsushiro.lg.jp/kiji00326750/index.html)と[緊急情報](https://www.city.yatsushiro.lg.jp/kinkyu.html)を開き、更新日時と新規項目を確認。URLは毎回このリンク一覧で照合する。
