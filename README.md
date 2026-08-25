@@ -7,7 +7,7 @@
 **都市ガス8,892戸の供給停止**など、今回の地震で最も深刻な被害を受けた自治体の一つ。
 
 - **公開URL**: https://toritarosan.github.io/yatsushiro-shien-dashboard/
-- **情報の時点**: 2026-08-24 12:06 JST（各項目に出典と時刻を明記）
+- **情報の時点**: 2026-08-25 12:06 JST（各項目に出典と時刻を明記）
 - **構成**: `index.html` 1ファイル完結（外部依存なし・ビルド不要）
 - **姉妹版**: [宇城市版](https://toritarosan.github.io/uki-shien-dashboard/)（[リポジトリ](https://github.com/toritarosan/uki-shien-dashboard)）
 
@@ -40,7 +40,7 @@
 - [x] HTMLタグ整合性・アンカーリンク切れなしを機械検証
 - [x] 八代市の全URLを市公式のリンク一覧と突き合わせて実在確認
 - [ ] GitHub Pages公開・実機（スマホ）表示確認
-- [x] 自動巡回ルーティンの設置（1日複数回、GitHub Actions/スケジュール実行で継続稼働中。最終更新 2026-08-24 12:06 JST）
+- [x] 自動巡回ルーティンの設置（1日複数回、GitHub Actions/スケジュール実行で継続稼働中。最終更新 2026-08-25 12:06 JST）
 
 ## 免責
 
