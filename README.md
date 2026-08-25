@@ -9,6 +9,7 @@
 - **公開URL**: https://toritarosan.github.io/yatsushiro-shien-dashboard/
 - **情報の時点**: 2026-08-25 12:06 JST（各項目に出典と時刻を明記）
 - **構成**: `index.html` 1ファイル完結（外部依存なし・ビルド不要）
+- **ページの作り**: 本文は「いま現在の状況」だけを載せ、これまでの経緯とこのページで行った訂正は末尾の「経緯・訂正の記録」（折りたたみ）にまとめています。冒頭の「今日◯/◯変わったこと」で当日の変化だけを拾えます
 - **姉妹版**: [宇城市版](https://toritarosan.github.io/uki-shien-dashboard/)（[リポジトリ](https://github.com/toritarosan/uki-shien-dashboard)）
 
 ## Claude Codeへの引継ぎ
